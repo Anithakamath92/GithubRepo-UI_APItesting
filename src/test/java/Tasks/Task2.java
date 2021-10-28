@@ -16,21 +16,21 @@ public class Task2 {
 		//System.setProperty("webdriver.chrome.driver","C:\\Users\\anith\\Documents\\Selenium\\Browser drivers\\New\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		
-		SearchPage searchPage= new SearchPage();
-		RepoPage repoPage =new RepoPage();
+		SearchPage searchPage= new SearchPage(driver);
+		RepoPage repoPage =new RepoPage(driver);
 		
 		driver.get("https://github.com/"); // open the browser and open the GitHub page
 		driver.manage().window().maximize();
 
-		searchPage.searchTextBox(driver).sendKeys("user:" + userInput + "");
-		searchPage.searchTextBox(driver).sendKeys(Keys.ENTER); //Search the given user name
+		searchPage.searchTextBox().sendKeys("user:" + userInput + "");
+		searchPage.searchTextBox().sendKeys(Keys.ENTER); //Search the given user name
 
-		if(searchPage.repoList(driver).size()>0)
+		if(searchPage.repoList().size()>0)
 		{
 			
-		String repo = searchPage.repoListResult(driver).getText().split("/")[1];
-		searchPage.repoListResult(driver).click();// open the first repo from the list
-		String starUI = repoPage.starCount(driver).getText();//fetch the stars from UI for the repo
+		String repo = searchPage.repoListResult().getText().split("/")[1];
+		searchPage.repoListResult().click();// open the first repo from the list
+		String starUI = repoPage.starCount().getText();//fetch the stars from UI for the repo
 
 		int starAPI = hmap.get(repo); // get the stars for repo from hashmap[which has values from API]
 		String starAPIstr = Integer.toString(starAPI); //convert the starAPI to string to compare with the value from UI(starUI)

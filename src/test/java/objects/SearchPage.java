@@ -8,19 +8,25 @@ import org.openqa.selenium.WebElement;
 
 public class SearchPage {
 	
+	WebDriver driver;
 	By searchTextBox = By.xpath("//input[@placeholder=\"Search GitHub\"]");
 	By repoList= By.xpath("//*[@class=\"repo-list\"]");
 	By repoListResult = By.xpath("//ul[@class=\"repo-list\"]//li//a[@class=\"v-align-middle\"]");
 	
-	public WebElement searchTextBox(WebDriver driver) {
+	
+	public SearchPage(WebDriver driver){
+        this.driver = driver;
+    }
+	
+	public WebElement searchTextBox() {
 		return driver.findElement(searchTextBox);
 	}
 
-	public <WebElements> List<WebElement> repoList(WebDriver driver) {
+	public <WebElements> List<WebElement> repoList() {
 		return driver.findElements(searchTextBox);
 	}
 	
-	public WebElement repoListResult(WebDriver driver) {
+	public WebElement repoListResult() {
 		return driver.findElement(repoListResult);
 	}
 

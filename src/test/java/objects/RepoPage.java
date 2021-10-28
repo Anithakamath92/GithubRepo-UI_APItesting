@@ -6,9 +6,14 @@ import org.openqa.selenium.WebElement;
 
 public class RepoPage {
 	
+	WebDriver driver;
 	By starCount = By.xpath("//*[@id='repository-container-header']//a[@class='social-count js-social-count']");
 	
-	public WebElement starCount(WebDriver driver) {
+	public RepoPage(WebDriver driver){
+        this.driver = driver;
+    }
+	
+	public WebElement starCount() {
 		return driver.findElement(starCount);
 	}
 	
