@@ -7,6 +7,7 @@ import objects.SearchPage;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 
 public class Task2 {
 
@@ -31,6 +32,8 @@ public class Task2 {
 		String repo = searchPage.repoListResult().getText().split("/")[1];
 		searchPage.repoListResult().click();// open the first repo from the list
 		String starUI = repoPage.starCount().getText();//fetch the stars from UI for the repo
+		
+		driver.quit();
 
 		int starAPI = hmap.get(repo); // get the stars for repo from hashmap[which has values from API]
 		String starAPIstr = Integer.toString(starAPI); //convert the starAPI to string to compare with the value from UI(starUI)
@@ -42,16 +45,17 @@ public class Task2 {
 		System.out.println("Username = "+userInput+"\nRepo name = " + repo + "\n Stars from UI = " + starUI+ "\n Stars from API  = " + starAPI + 
 				"\n Stars from API(k)  = " + starAPIstr);
 
-		//Assert.assertEquals(starUI, starAPIstr); // compare stars obtained from UI and API 
+		Assert.assertEquals(starUI, starAPIstr); // compare stars obtained from UI and API 
 		
 		System.out.println("\nTest Passed- Stars for the repo "+ repo+ " from UI("+starUI+ ") matches stars from API("+starAPI+")");
 		}
 		else
 		{
 			System.out.println("Repository/username doesn't exist. Verified from UI");
+			driver.quit();
 		}
 		
-		driver.quit();
+		
 	}
 
 }
